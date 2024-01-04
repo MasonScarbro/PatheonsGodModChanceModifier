@@ -12,6 +12,7 @@ root = ctk.CTk(fg_color="#101519")
 
 root.geometry("1800x900")
 root.title("Value Editor")
-#label_names = ["Mason", "Poop", "Fart"]
-#Formatting.automatedLabelCreation(label_names, root)
-root.mainloop() #Main Loop
+label_names = ["Mason", "Poop", "Fart"]
+Formatting.Labels.automatedLabelCreation(label_names, root)
+Formatting.Entrys.automatedEntryWrite("Test", arrOfVarNames=["powerOfSun", "starsPower", "lightBallzPower"], frameAsString='root')
+root.mainloop() #Main Loops
