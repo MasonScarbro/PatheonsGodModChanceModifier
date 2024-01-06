@@ -27,8 +27,7 @@ class Formatting:
                 label.grid(row=i, column=column, padx=4, pady=4)
     
     class Entrys:
-        global all_entrys
-        all_entrys = []
+        
         
         def new_entry(frame):
             return ctk.CTkEntry(
@@ -39,17 +38,21 @@ class Formatting:
             )
 
 
-        #WORK NEEDED!
-        def automatedEntryCreate(numOfEntries, frame, column=0):
-            for i in  range(numOfEntries):
+        
+        def automatedEntryCreate(arrayOfVarNames, frame, column=0):
+            all_entrys = {}
+            for i in range(len(arrayOfVarNames)):
                 base_entry = Formatting.Entrys.new_entry(frame)
                 base_entry.grid(row=i, column=column, padx=8, pady=8)
-                all_entrys.append(base_entry.get())
+                all_entrys[arrayOfVarNames[i]] = base_entry
+            print(all_entrys)
+            return all_entrys
 
 
         def format_entry_util(entryArr, column):
             for i, entryArr in enumerate(entryArr):
                 entryArr.grid(row=i, column=column, padx=2, pady=4)
+
 
         def automatedEntryWrite(enumeratedName, numOfEntries=0, arrOfVarNames=[], frameAsString='root', path=os.getcwd(), formmatted=True, column=0, fileName="WritedFile", append=True):
             global string
@@ -60,11 +63,11 @@ class Formatting:
             print(" And the Arr is: " + str(len(arrOfVarNames)))
             for i in range(numOfEntries):
                 if len(arrOfVarNames) == 0:
-                    string += enumeratedName + str(i) + " = " + "new_entry" + "(" + frameAsString + ")" + '\n'
+                    string += enumeratedName + str(i) + " = " + "Formatting.Entrys.new_entry" + "(" + frameAsString + ")" + '\n'
                     #print(string)
                 else:
                     print(string)
-                    string += arrOfVarNames[i] + " = " + "new_entry" + "(" + frameAsString + ")" + '\n'
+                    string += arrOfVarNames[i] + " = " + "Formatting.Entrys.new_entry" + "(" + frameAsString + ")" + '\n'
                 
             if formmatted == True:
                 string += enumeratedName + "Arr" + " = " + "[\n" 
@@ -82,3 +85,7 @@ class Formatting:
                 else:
                     with open(Path(path) / Path(fileName + ".py"), 'w') as f:
                         f.write(string)
+    
+    class Buttons:
+        def new_button(string, cmd, frame): 
+            return ctk.CTkButton(frame, text=string, width=100, fg_color="#fcf9ff", text_color="#101519", corner_radius=5, command=cmd)
