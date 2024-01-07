@@ -16,7 +16,7 @@ class Formatting:
                 frame,
                 text=string,
                 font=ctk.CTkFont(family="", size=15, weight="bold"),
-                text_color="#fcf9ff",
+                text_color="#203547",
             )
     
 
@@ -39,11 +39,18 @@ class Formatting:
 
 
         
-        def automatedEntryCreate(arrayOfVarNames, frame, column=0):
+        def automatedEntryCreate(arrayOfVarNames, frame, column=0, default_values=[], generate_percentage=[True, 3]):
             all_entrys = {}
             for i in range(len(arrayOfVarNames)):
                 base_entry = Formatting.Entrys.new_entry(frame)
+                if len(default_values) != 0:
+                    base_entry.insert(0, default_values[i])
                 base_entry.grid(row=i, column=column, padx=8, pady=8)
+                #Personal func, Delete when porting to PyPi
+                if generate_percentage[0] == True:
+                    tempLable = Formatting.Labels.new_label("%", frame=frame)
+                    tempLable.grid(row=i, column=generate_percentage[1], padx=4, pady=4)
+
                 all_entrys[arrayOfVarNames[i]] = base_entry
             print(all_entrys)
             return all_entrys
